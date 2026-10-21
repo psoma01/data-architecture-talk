@@ -1,0 +1,39 @@
+-- NL2SQL Schema Context
+-- This file is the data dictionary the agent reads before generating SQL.
+
+Base tables:
+  customer    (customer_id, first_name, last_name, email, address_id, active, create_date)
+  film        (film_id, title, description, release_year, rental_rate, length, rating)
+  category    (category_id, name)
+  film_category (film_id, category_id)
+  inventory   (inventory_id, film_id, store_id)
+  rental      (rental_id, rental_date, inventory_id, customer_id, return_date, staff_id)
+  payment     (payment_id, customer_id, staff_id, rental_id, amount, payment_date)
+  city        (city_id, city, country)
+  address     (address_id, address, city_id, postal_code)
+
+Views — use these instead of joining base tables manually:
+
+  active_rentals columns:
+    rental_id, customer_name, film_title, category,
+    rental_date, return_date, status
+  Rules:
+    - return_date IS NULL means the film has not been returned yet
+    - status is either 'Returned' or 'Not returned'
+    - Do NOT join other tables into this view — all data is already included
+    - Do NOT use COUNT(*) or GROUP BY with this view — just SELECT and WHERE
+
+  customer_spend columns:
+    customer_id, customer_name, email, city,
+    total_rentals, total_spent, last_payment
+  Rules:
+    - This view is already aggregated — do NOT use COUNT(*), SUM(), or GROUP BY
+    - total_rentals (INTEGER) — number of rentals per customer
+    - total_spent (NUMERIC) — total payment amount per customer
+    - Just SELECT the columns you need, ORDER BY, and LIMIT
+
+SQL rules:
+  - Use column names exactly as listed above — no guessing
+  - Prefer views over manual joins
+  - Only write SELECT statements — never INSERT, UPDATE, or DELETE
+  - Limit to 20 rows unless the user asks for all

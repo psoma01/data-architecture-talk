@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://psomaus.com/ontology/clinical#"
+     xml:base="http://psomaus.com/ontology/clinical"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:dcterms="http://purl.org/dc/terms/">
+
+    <owl:Ontology rdf:about="http://psomaus.com/ontology/clinical">
+        <dcterms:title>Clinical Concept Ontology — Demo</dcterms:title>
+        <dcterms:description>A small clinical ontology for demonstrating how agents resolve plain-English terms to structured medical codes before querying data. Built for Women In Data Toronto 2026.</dcterms:description>
+        <dcterms:creator>Prashanth Soma</dcterms:creator>
+        <owl:versionInfo>1.0.0</owl:versionInfo>
+    </owl:Ontology>
+
+    <!-- ==================== ANNOTATION PROPERTIES ==================== -->
+
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#icd10Code"/>
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#icd9Code"/>
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#snomedCode"/>
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#synonym"/>
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#plainEnglishTerm"/>
+    <owl:AnnotationProperty rdf:about="http://psomaus.com/ontology/clinical#clinicalNote"/>
+
+    <!-- ==================== CLASS HIERARCHY ==================== -->
+
+    <!-- Level 1: Disease (root) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#Disease">
+        <rdfs:label>Disease</rdfs:label>
+        <skos:definition>Any abnormal condition that negatively affects the structure or function of all or part of an organism.</skos:definition>
+    </owl:Class>
+
+    <!-- Level 2: Chronic Disease -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#ChronicDisease">
+        <rdfs:label>Chronic Disease</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#Disease"/>
+        <skos:definition>A disease that persists for a long time, typically more than three months, and cannot be prevented by vaccines or cured by medication.</skos:definition>
+    </owl:Class>
+
+    <!-- Level 2: Acute Disease -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#AcuteDisease">
+        <rdfs:label>Acute Disease</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#Disease"/>
+        <skos:definition>A disease with a rapid onset and short course, typically lasting less than three months.</skos:definition>
+    </owl:Class>
+
+    <!-- Level 3a: Diabetes (under ChronicDisease) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#Diabetes">
+        <rdfs:label>Diabetes</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#ChronicDisease"/>
+        <skos:definition>A group of metabolic diseases in which the person has high blood sugar, either because the body does not produce enough insulin or because cells do not respond to the insulin that is produced.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">E08-E13</icd10Code>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">diabetes</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">diabetic</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">blood sugar</plainEnglishTerm>
+    </owl:Class>
+
+    <!-- Level 4a: Type 2 Diabetes -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#DiabetesType2">
+        <rdfs:label>Type 2 Diabetes Mellitus</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#Diabetes"/>
+        <skos:definition>The most common form of diabetes, caused by a combination of insulin resistance and relative insulin deficiency. Associated with obesity and inactivity.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">E11</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">250.00</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">44054006</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">T2DM</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">Type II Diabetes</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">adult-onset diabetes</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">non-insulin-dependent diabetes</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">type 2 diabetes</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">t2dm</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">adult onset diabetes</plainEnglishTerm>
+        <clinicalNote xmlns="http://psomaus.com/ontology/clinical#">HbA1c &gt;= 6.5% is diagnostic. Managed with lifestyle, metformin, and other oral agents or insulin.</clinicalNote>
+    </owl:Class>
+
+    <!-- Level 4b: Type 1 Diabetes -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#DiabetesType1">
+        <rdfs:label>Type 1 Diabetes Mellitus</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#Diabetes"/>
+        <skos:definition>An autoimmune condition in which the pancreatic beta cells are destroyed, resulting in absolute insulin deficiency.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">E10</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">250.01</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">46635009</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">T1DM</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">juvenile diabetes</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">insulin-dependent diabetes</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">type 1 diabetes</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">juvenile diabetes</plainEnglishTerm>
+        <clinicalNote xmlns="http://psomaus.com/ontology/clinical#">Requires lifelong insulin therapy. Onset typically in childhood or early adulthood.</clinicalNote>
+    </owl:Class>
+
+    <!-- Level 4c: Gestational Diabetes -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#GestationalDiabetes">
+        <rdfs:label>Gestational Diabetes Mellitus</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#Diabetes"/>
+        <skos:definition>Diabetes diagnosed during pregnancy that was not clearly overt diabetes prior to gestation.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">O24.4</icd10Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">11687002</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">GDM</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">gestational diabetes</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">pregnancy diabetes</plainEnglishTerm>
+    </owl:Class>
+
+    <!-- Level 3b: Heart Failure (under ChronicDisease) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#HeartFailure">
+        <rdfs:label>Heart Failure</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#ChronicDisease"/>
+        <skos:definition>A chronic condition in which the heart muscle does not pump blood as well as it should.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">I50</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">428</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">84114007</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">CHF</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">congestive heart failure</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">cardiac failure</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">heart failure</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">chf</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">congestive heart failure</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">cardiac failure</plainEnglishTerm>
+        <clinicalNote xmlns="http://psomaus.com/ontology/clinical#">Classified as HFrEF (reduced ejection fraction, EF &lt; 40%) or HFpEF (preserved EF &gt;= 50%).</clinicalNote>
+    </owl:Class>
+
+    <!-- Level 4: HFrEF -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#HeartFailureReducedEF">
+        <rdfs:label>Heart Failure with Reduced Ejection Fraction</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#HeartFailure"/>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">I50.2</icd10Code>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">HFrEF</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">systolic heart failure</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">hfref</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">systolic heart failure</plainEnglishTerm>
+    </owl:Class>
+
+    <!-- Level 3c: Hypertension (under ChronicDisease) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#Hypertension">
+        <rdfs:label>Hypertension</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#ChronicDisease"/>
+        <skos:definition>A long-term medical condition in which the blood pressure in the arteries is persistently elevated.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">I10</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">401</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">38341003</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">HTN</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">high blood pressure</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">arterial hypertension</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">hypertension</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">htn</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">high blood pressure</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">blood pressure</plainEnglishTerm>
+        <clinicalNote xmlns="http://psomaus.com/ontology/clinical#">Defined as systolic BP &gt;= 130 mmHg or diastolic BP &gt;= 80 mmHg (ACC/AHA 2017 guidelines).</clinicalNote>
+    </owl:Class>
+
+    <!-- Level 3d: COPD (under ChronicDisease) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#COPD">
+        <rdfs:label>Chronic Obstructive Pulmonary Disease</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#ChronicDisease"/>
+        <skos:definition>A chronic inflammatory lung disease that causes obstructed airflow from the lungs.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">J44</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">496</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">13645005</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">COPD</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">emphysema</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">chronic bronchitis</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">copd</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">emphysema</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">chronic obstructive pulmonary disease</plainEnglishTerm>
+    </owl:Class>
+
+    <!-- Level 3e: Depression (under ChronicDisease) -->
+    <owl:Class rdf:about="http://psomaus.com/ontology/clinical#Depression">
+        <rdfs:label>Major Depressive Disorder</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://psomaus.com/ontology/clinical#ChronicDisease"/>
+        <skos:definition>A mental health disorder characterised by persistently depressed mood or loss of interest in activities.</skos:definition>
+        <icd10Code xmlns="http://psomaus.com/ontology/clinical#">F32</icd10Code>
+        <icd9Code xmlns="http://psomaus.com/ontology/clinical#">296.2</icd9Code>
+        <snomedCode xmlns="http://psomaus.com/ontology/clinical#">370143000</snomedCode>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">MDD</synonym>
+        <synonym xmlns="http://psomaus.com/ontology/clinical#">clinical depression</synonym>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">depression</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">depressed</plainEnglishTerm>
+        <plainEnglishTerm xmlns="http://psomaus.com/ontology/clinical#">major depressive disorder</plainEnglishTerm>
+    </owl:Class>
+
+</rdf:RDF>
