@@ -40,7 +40,7 @@ uv run python --version
 
 ```bash
 # Copy the example and edit if needed
-cp nl2sql-stub/.env.example nl2sql-stub/.env
+cp nl2sql-stub/env.example nl2sql-stub/.env
 ```
 
 The defaults work on macOS without changes — `PGUSER` is empty, which
@@ -135,7 +135,7 @@ uv run python ontology-demo/mcp_ontology_tool.py
 2. Open Protégé → **File → Open** → select `ontology-demo/clinical_ontology.owl`
 3. Click the **Classes** tab
 4. Navigate: `Thing → Disease → ChronicDisease → DiabetesType2`
-5. In the **Annotations** panel show `icd10Code: E11`, `synonym: T2DM`
+5. In the **Annotations** panel view `icd10Code: E11`, `synonym: T2DM`
 
 ---
 
@@ -175,27 +175,22 @@ source ~/.bashrc   # or restart terminal
 
 ---
 
-## Demo sequence (50 minutes)
+** Protégé on macOS Gatekeeper ** 
+When you open Protégé for the first time, macOS might block it with a warning
+stating it "can’t be opened because it is from an unidentified developer".
+To bypass this:
+Go to System Settings > Privacy & Security.
+Scroll down to the Security section and click "Open Anyway"
 
-| Time | What | File / Tool |
-|------|------|-------------|
-| 0–3 min | Thesis and agenda | Deck |
-| 3–15 min | Five eras walk | Deck |
-| 15–17 min | Parquet in DBeaver | DBeaver + any .parquet file |
-| 17–21 min | MCP docstrings | `llm.py` — point to `generate_sql()` docstring |
-| 21–25 min | Ontology — Protégé + lookup | Protégé + terminal |
-| 25–33 min | NL2SQL agent | `agent.py` open in editor, `demo.py` in terminal |
-| 33–38 min | Thesis and close | Deck |
-| 38–50 min | Q&A | References slide on screen |
 
-### Files to have open before you go on stage
+### Files to have open for exploring
 
 ```
-editor tab 1  →  nl2sql-stub/agent.py          (the chain — show this first)
-editor tab 2  →  nl2sql-stub/llm.py            (docstrings — MCP moment)
+editor tab 1  →  nl2sql-stub/agent.py          (the chain)
+editor tab 2  →  nl2sql-stub/llm.py            (MCP docstrings)
 editor tab 3  →  nl2sql-stub/schema_context.txt (the data dictionary)
 editor tab 4  →  ontology-demo/mcp_ontology_tool.py
 terminal 1    →  ollama serve
-terminal 2    →  ready for: uv run python nl2sql-stub/demo.py
+terminal 2    →  uv run python nl2sql-stub/demo.py
 Protégé       →  clinical_ontology.owl loaded, DiabetesType2 selected
 ```

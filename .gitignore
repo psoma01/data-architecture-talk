@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.uv/
+
+# Environment
+.env
+nl2sql-stub/.env
+
+# uv
+uv.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Deck PDF
+deck/*.pdf
